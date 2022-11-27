@@ -60,6 +60,10 @@ def load_results_linkage(dirname):
     for gameParams, gameRes in games:
         tpSyn, fpSyn = get_tp_fp_rates(gameRes['AttackerGuess'], gameRes['Secret'])
         advantageSyn = get_mia_advantage(tpSyn, fpSyn)
+        
+        accSyn = get_acc_mia(gameRes['AttackerGuess'], gameRes['Secret'])
+        advantageSyn = accSyn
+        
         advantageRaw = 1
 
         resAgg.append(gameParams + (tpSyn, fpSyn, advantageSyn, advantageRaw))
@@ -243,10 +247,13 @@ def load_results_utility(dirname):
 ### Plotting
 def plt_per_target_pg(results, models, resFilter=('FeatureSet', 'Naive')):
     """ Plot per record average privacy gain. """
+#     print(results)
     results = results[results[resFilter[0]] == resFilter[1]]
+    print(results)
 
     fig, ax = plt.subplots(figsize=(10, 6))
-    pointplot(results, 'TargetModel', 'PrivacyGain', 'TargetID', ax, models)
+#     pointplot(results, 'TargetModel', 'PrivacyGain', 'TargetID', ax, models)
+    pointplot(results, 'TargetModel', 'AdvantageSyn', 'TargetID', ax, models)
 
     ax.set_title(f'Attack on {resFilter[0]}: {resFilter[1]}', fontsize=FSIZELABELS)
     ax.legend(loc='upper center', bbox_to_anchor=(.5, 1.3), ncol=5, title='TargetID')

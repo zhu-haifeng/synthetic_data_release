@@ -18,7 +18,14 @@ def get_accuracy(guesses, labels, targetPresence):
 def get_tp_fp_rates(guesses, labels):
     targetIn = where(labels == LABEL_IN)[0]
     targetOut = where(labels == LABEL_OUT)[0]
+#     return sum(guesses[targetIn] == LABEL_IN)/len(targetIn), sum(guesses[targetOut] == LABEL_OUT)/len(targetOut)
     return sum(guesses[targetIn] == LABEL_IN)/len(targetIn), sum(guesses[targetOut] == LABEL_IN)/len(targetOut)
+
+# new add
+def get_acc_mia(guesses, labels):
+    targetIn = where(labels == LABEL_IN)[0]
+    targetOut = where(labels == LABEL_OUT)[0]
+    return (sum(guesses[targetIn] == LABEL_IN) + sum(guesses[targetOut] == LABEL_OUT))/len(labels)
 
 
 def get_probs_correct(pdf, targetPresence):
