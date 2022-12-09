@@ -356,15 +356,15 @@ class BTCGAN(BaseSynthesizer):
             if train_discriminator and loss_d_real - loss_d_fake > 0.05:
                 train_discriminator = False
 #                     discriminator.eval()
-                print(i, 'stop')
+#                 print(i, 'stop')
             elif not train_discriminator and torch.mean(y_fake) >= 0.485:
                 train_discriminator = True
 #                     discriminator.train()
-                print(i, 'start')
+#                 print(i, 'start')
             if self._verbose and (i % 50 == 0 or i == epochs-1):
                 loss_d = loss_d.detach().cpu()
-                print('Epoch %d: LossG(%.4f -fake+l2): fake: %.4f, mean: %.4f, std: %.4f, mse:%.4f; LossD(-(real-fake) %.4f): real: %.4f, fake: %.4f' % 
-                     (i+1, loss_g.detach().cpu(), torch.mean(y_fake).detach().cpu(), mean_loss.detach().cpu(), std_loss.detach().cpu(), mse_loss.detach().cpu(), loss_d, loss_d_real, loss_d_fake))
+#                 print('Epoch %d: LossG(%.4f -fake+l2): fake: %.4f, mean: %.4f, std: %.4f, mse:%.4f; LossD(-(real-fake) %.4f): real: %.4f, fake: %.4f' % 
+#                      (i+1, loss_g.detach().cpu(), torch.mean(y_fake).detach().cpu(), mean_loss.detach().cpu(), std_loss.detach().cpu(), mse_loss.detach().cpu(), loss_d, loss_d_real, loss_d_fake))
 
 
     def sample(self, n):
@@ -372,7 +372,8 @@ class BTCGAN(BaseSynthesizer):
         steps = (n+self._batch_size-1) // self._batch_size
         data = np.zeros((n, self._transformer.output_dimensions), dtype='float32')
         cross_entropy = {}
-        for i in tqdm(range(steps), desc='Sampling...'):
+#         for i in tqdm(range(steps), desc='Sampling...'):
+        for i in range(steps):
             if i == 0:
                 condvec = self._transformer.get_bayes_convec(self._batch_size, use_buff=False)
             else:

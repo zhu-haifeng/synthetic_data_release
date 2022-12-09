@@ -235,7 +235,8 @@ def generate_mia_shadow_data(GenModel, target, rawA, sizeRaw, sizeSyn, numModels
 
     kf = ShuffleSplit(n_splits=numModels, train_size=sizeRaw)
 
-    if GenModel.multiprocess:
+#     if GenModel.multiprocess:
+    if False:
 
         manager = mp.Manager()
         synA = manager.list()

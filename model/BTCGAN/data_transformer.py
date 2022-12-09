@@ -178,7 +178,8 @@ class DataTransformer(object):
         self._col_start_dim = {}
         self.cond_pos = []
         self.gen_cond_pos = []
-        for column_name in tqdm(raw_data.columns, desc='Fit data...'):
+#         for column_name in tqdm(raw_data.columns, desc='Fit data...'):
+        for column_name in raw_data.columns:
             raw_column_data = raw_data[column_name].values
             if column_name in discrete_columns: # 离散列
                 column_transform_info = self._fit_discrete(
@@ -283,8 +284,8 @@ class DataTransformer(object):
 #             print(self._bayes_df.info())
             self._child_parents = algorithm(self._bayes_df, prior_edges=bayes_edges, no_parents=no_parents)
             end = time.perf_counter()
-            print('Learning structure use %.4fs'%(end-start))
-            print(self._child_parents)
+#             print('Learning structure use %.4fs'%(end-start))
+#             print(self._child_parents)
             self._set_bayes_condition_prob(raw_data)
             
             return self._bayes_df
@@ -317,7 +318,8 @@ class DataTransformer(object):
     def _set_bayes_condition_prob(self, raw_data):
         self.condition_prob = {}
         
-        for child, parents in tqdm(self._child_parents.items(), desc='Learning condition prob...'):
+#         for child, parents in tqdm(self._child_parents.items(), desc='Learning condition prob...'):
+        for child, parents in self._child_parents.items():
 #             bayes_title = 'bayes: '+','.join(parents)+' -> '+child #
 #             raw_data[bayes_title] = 0 #
             prob_table = pd.DataFrame()

@@ -90,6 +90,16 @@ To run a privacy evaluation with respect to the privacy concern of linkability y
 python3 linkage_cli.py -D data/texas -RC tests/linkage/runconfig.json -O tests/linkage
 ```
 
+
+```
+python3 linkage_cli_my.py -D data/texas -RC tests/linkage/runconfig_my.json -O tests/linkage
+```
+
+
+```
+python3 linkage_cli_my.py -D data/texas -RC tests/linkage_9000/runconfig_my.json -O tests/linkage_9000
+```
+
 The results file produced after successfully running the script will be written to `tests/linkage` and can be parsed with the function `load_results_linkage` provided in `utils/analyse_results.py`. 
 A jupyter notebook to visualise and analyse the results is included at `notebooks/Analyse Results.ipynb`.
 
@@ -100,6 +110,11 @@ To run a privacy evaluation with respect to the privacy concern of inference you
 python3 inference_cli.py -D data/texas -RC tests/inference/runconfig.json -O tests/inference
 ```
 
+
+```
+python3 inference_cli_my.py -D data/texas -RC tests/inference/runconfig_my.json -O tests/inference
+```
+
 The results file produced after successfully running the script can be parsed with the function `load_results_inference` provided in `utils/analyse_results.py`.
 A jupyter notebook to visualise and analyse the results is included at `notebooks/Analyse Results.ipynb`.
 
@@ -108,6 +123,11 @@ To run a utility evaluation with respect to a simple classification task as util
 
 ```
 python3 utility_cli.py -D data/texas -RC tests/utility/runconfig.json -O tests/utility
+```
+
+
+```
+python3 utility_cli.py -D data/texas -RC tests/utility/runconfig_my.json -O tests/utility
 ```
 
 The results file produced after successfully running the script can be parsed with the function `load_results_utility` provided in `utils/analyse_results.py`.
